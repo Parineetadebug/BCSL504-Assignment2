@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Online Application Form</title>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif;}
+
+    body {
+        background: linear-gradient(120deg, #6a11cb, #2575fc);
+        padding: 30px;
+        color: #2c3e50;
+    }
+
+    .container {
+        max-width: 550px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-top: 12px;
+        font-weight: 600;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 2px solid #ddd;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 8px rgba(106,17,203,0.3);
+    }
+
+    button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        background: linear-gradient(120deg, #2575fc, #6a11cb);
+        color: white;
+        font-size: 17px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    button:hover {opacity: 0.9;}
+
+    .output {
+        display: none;
+        margin-top: 25px;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .output p {
+        font-size: 17px;
+        padding: 8px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    strong {color: #6a11cb;}
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Online Registration Form</h2>
+
+    <form id="appForm">
+
+        <label>Full Name:</label>
+        <input type="text" id="name" required>
+
+        <label>Email:</label>
+        <input type="email" id="email" required>
+
+        <label>Mobile Number:</label>
+        <input type="text" id="mobile" required>
+
+        <label>Date of Birth:</label>
+        <input type="date" id="dob" required>
+
+        <label>Course Applying For:</label>
+        <select id="course" required>
+            <option value="">-- Select Course --</option>
+            <option value="BCA">BCA</option>
+            <option value="BBA">BBA</option>
+            <option value="B.Com">B.Com</option>
+            <option value="BA">BA</option>
+            <option value="MBA">MBA</option>
+            <option value="MCA">MCA</option>
+        </select>
+
+        <label>Address:</label>
+        <textarea id="address" rows="3" required></textarea>
+
+        <button type="button" id="submitBtn">Submit Application</button>
+    </form>
+
+    <!-- Display Output -->
+    <div class="output" id="resultBox">
+        <h2>Application Submitted Successfully!</h2>
+
+        <p><strong>Full Name:</strong> <span id="outName"></span></p>
+        <p><strong>Email:</strong> <span id="outEmail"></span></p>
+        <p><strong>Mobile:</strong> <span id="outMobile"></span></p>
+        <p><strong>Date of Birth:</strong> <span id="outDob"></span></p>
+        <p><strong>Course Applied:</strong> <span id="outCourse"></span></p>
+        <p><strong>Address:</strong> <span id="outAddress"></span></p>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+
+    $("#submitBtn").click(function(){
+
+        // Validation
+        let mobile = $("#mobile").val();
+        if(isNaN(mobile) || mobile.length != 10){
+            alert("Enter a valid 10-digit mobile number!");
+            return;
+        }
+
+        // Fill Output Box
+        $("#outName").text($("#name").val());
+        $("#outEmail").text($("#email").val());
+        $("#outMobile").text($("#mobile").val());
+        $("#outDob").text($("#dob").val());
+        $("#outCourse").text($("#course").val());
+        $("#outAddress").text($("#address").val());
+
+        // Show Output
+        $("#resultBox").slideDown(600);
+    });
+
+});
+</script>
+
+</body>
+</html>
